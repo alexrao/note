@@ -1,0 +1,4 @@
+ubuntu14.10没有声音
+
+1. 在terminal里面输入： $ sudo alsamixer
+2. F6 select sound card(根据自身情况选择即可,不知道可多测试测试)
