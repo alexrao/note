@@ -1,0 +1,19 @@
+1. ：打开终端，
+关闭触摸板:   synclient touchpadoff=1
+打开触摸板：  synclient touchpadoff=0
+
+写成脚本
+
+/home/user/.touch_pad.sh
+
+#bash
+path_tmp=/tmp/.touch_pad.tmp
+if[! -d "$path_tmp"];then
+    touch $path_tmp
+    synclient touchpadoff=1
+    echo"open touchpad"
+else
+    rm $path_tmp
+    synclient touchpadoff=1
+    echo "close touchpad"
+fi
