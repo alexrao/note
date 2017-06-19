@@ -1,0 +1,33 @@
+1. 安装系统后安装apt-get install lib32z1 lib32ncurses5 libc6-i386 libstdc++6  lib32stdc++6
+    vim、gedit、gdb、gcc、build-essential等、
+2. fcitx添加google拼音
+sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-googlepinyin fcitx-module-cloudpinyin
+3. git、subversion
+2. 交叉编译工具无效的处理（64位系统下面兼容32位）
+apt-get install lib32z1 lib32ncurses5 libc6-i386 libstdc++6  lib32stdc++6
+3. 配置git
+git config --global push.default simple
+git config --global alias.st status
+git config --global alias.ci commit
+git config --global alias.cim 'commit -m'
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ps push
+git config --global alias.pl pull
+git config --global alias.unstage 'reset HEAD'
+git config --global alias.last 'log -1'
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global user.name "alexrao"
+git config --global user.email "rxp2013@163.com"
+
+4. 解决vmware tools共享在linux显示不了文件的问题：
+sudo apt-get install linux-source
+sudo apt-get install open-vm-tools
+Just keep on pressing Enter for all defaults and then do this at the terminal
+
+1. vmware-hgfsclient    查看当前共享的文件夹
+2. 挂载当前共享的所有文件夹
+mount -t vmhgfs .host:/ /mnt/hgfs
+5. 修改svn提交时候的默认编辑器（命令行输入： update-alternatives --config editor， 然后选择）
+
+
