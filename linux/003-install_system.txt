@@ -32,7 +32,7 @@ mount -t vmhgfs .host:/ /mnt/hgfs
 
 
 另外：
-1. 安装  bison build-essential
+1. 安装  bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf mkimage
 2. apt-get install g++-multilib 
 3. apt-get install apt-file 
 4. 
