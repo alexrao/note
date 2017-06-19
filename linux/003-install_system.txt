@@ -36,11 +36,11 @@ mount -t vmhgfs .host:/ /mnt/hgfs
 2. apt-get install g++-multilib 
 3. apt-get install apt-file 
 4. 
-update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.6.0_45/bin/javac 1
-update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.6.0_45/bin/java 1
-update-alternatives --install /usr/bin/javaws javaws /usr/lib/jvm/jdk1.6.0_45/bin/javaws 1
-update-alternatives --install /usr/bin/jar jar /usr/lib/jvm/jdk1.6.0_45/bin/jar 1
-update-alternatives --install /usr/bin/javap javap /usr/lib/jvm/jdk1.6.0_45/bin/javap 1
+update-alternatives --install /usr/bin/javac javac /home/workspace/tools/jvm/jdk1.6.0_38/bin/javac 1
+update-alternatives --install /usr/bin/java java 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/java 1
+update-alternatives --install /usr/bin/javaws javaws 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javaws 1
+update-alternatives --install /usr/bin/jar jar 		/home/workspace/tools/jvm/jdk1.6.0_38/bin/jar 1
+update-alternatives --install /usr/bin/javap javap 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javap 1
 update-alternatives --config javac
 update-alternatives --config java
 update-alternatives --config javaws
