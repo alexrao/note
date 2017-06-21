@@ -32,14 +32,12 @@ mount -t vmhgfs .host:/ /mnt/hgfs
 
 
 另外：
-1. 安装  bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf mkimage
-2. apt-get install g++-multilib 
-3. apt-get install apt-file 
-4. apt-get install libxml2-utils xsltproc 
+1. 安装  bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf   g++-multilib apt-file libxml2-utils xsltproc  android-tools-*  u-boot-tools
+2. apt-get install ctags ack-grep samba nfs-kernel-*  openssl gimp inkscape gthumb 
 update-alternatives --install /usr/bin/javac javac /home/workspace/tools/jvm/jdk1.6.0_38/bin/javac 1
 update-alternatives --install /usr/bin/java java 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/java 1
 update-alternatives --install /usr/bin/javaws javaws 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javaws 1
-update-alternatives --install /usr/bin/jar jar 		/home/workspace/tools/jvm/jdk1.6.0_38/bin/jar 1
+update-alternatives --install /usr/bin/jajsdkfjlkr jar 		/home/workspace/tools/jvm/jdk1.6.0_38/bin/jar 1
 update-alternatives --install /usr/bin/javap javap 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javap 1
 update-alternatives --config javac
 update-alternatives --config java
