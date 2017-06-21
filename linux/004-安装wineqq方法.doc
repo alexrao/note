@@ -1,0 +1,123 @@
+Wine安装最新版QQ(8.9.2)的简单教程
+时间:2017-05-10来源:ubuntukylin论坛 作者:waxiyibian
+本教程为本人在看了许多前辈有关WineQQ的文章后整理出来的，只保留最必须的步骤，略去多余步骤。
+到目前为止，关于WineQQ的安装的文章我已经写了3篇了，分别是ukylin论坛中的WineQQ7.8、WineQQ8.9.1和这次的WineQQ8.9.2。按理来说同一个类型的文章没有必要写这么多篇，但是本着分享和探索的原则，我还是写了，并且未来还会写很多。每一篇文章我都基于当时的环境进行了细致的测试，力求每一次的教程的方法都是可行的，尽量减少人为失误，并且尽量解释的详细。
+ 
+QQ是我们经常使用的聊天工具，然而linux下却缺乏原生的QQ应用，对学生与开发者的电脑日常使用造成相当大的不便。山不转水转，其实，在linux下安装QQ有许多中方法，如：
+1.用最新版Wine直接打开QQ安装包后再进行调试;
+2.用winetricks等工具提供的成套解决方案直接安装QQ;
+3.采用playonlinux提供的WineQQ解决方案;
+4.购买crossover后安装官方支持的QQ或者deepinQQ;
+5.安装网上广为流传的WineQQ国际版2012以及LongeneQQ7.8;
+6.使用genymotion或者ARCon等工具运行安卓版QQ;
+7.使用虚拟机等等。
+以上的所有安装方法有机会我都会提到的，参见即将出炉的：ubuntu下安装QQ的各种教程集锦，文章正在筹备中，链接：预计2016年6月上旬更新。
+ 
+本文主要讲的是第一种，使用最新版Wine安装最新版QQ，教程开始：
+所需文件：
+1.wine最新版（文中为2.0.1）
+2.QQ安装包最新版(文中为8.9.2)
+本文所提及的网站:
+1.提供Wine最新安装方案的-->Wine官网：https://www.winehq.org/
+2.你可能想了解的-->Winetricks-zh项目链接：https://github.com/hillwoodroc/winetricks-zh
+
+注：本次教程只需要安装最新版本的wine，并不需要winetricks、wine-mono、wine-gecko等其他插件，目前经实际测试发现只运行WineQQ可以不需要wine-mono、wine-gecko、W2KSP4.exe、InstMsiW.exe等，为简化步骤这里就不再说明。想了解的可以参见我写的另一篇文章：20170506-最新WineQQ8.9.1安装教程（http://www.linuxdiyf.com/linux/30619.html）
+ 
+一、安装最新版wine（详细安装方法可参照wine官网）
+参照Wine官网的说法，64位ubuntu需要先执行：
+sudo  dpkg  --add-architecture i386
+然后执行：
+wget  https://dl.winehq.org/wine-builds/Release.key
+sudo  apt-key add Release.key
+sudo  apt-add-repository  https://dl.winehq.org/wine-builds/ubuntu/
+sudo  apt-get  update
+这里我安装的是wine稳定版2.0.1，执行：
+sudo  apt-get  install  --install-recommends  winehq-stable
+这样，wine的安装就到此结束了，可以在终端输入 wine --version 查看版本号，此外还有一些配置工作需要做，终端执行：
+winecfg
+这个命令是为了更新主目录下的.wine目录，也就是创建一个默认容器。
+接着会有中文乱码并且相继弹出wine-mono和wine-gecko的安装器，不要理会，分别关掉两个窗口。然后按照这篇教程解决乱码问题，参见http://www.linuxdiyf.com/linux/30619.html
+刚才关掉的两个窗口是长这样的，实际上需要总共关闭3次。
+
+
+解决中文乱码问题后，再次打开终端执行：
+winecfg
+点击上方的“函数库”那一栏，并点击把光标移动到“新增库函数顶替”下方的方框里，分别输入
+*ntoskrnl.exe回车，*riched20回车，*txplatform.exe回车。
+然后在点击下方新出现的*ntoskrnl.exe和*txplatform.exe，点击编辑，选择“停用”。
+如下图所示：(注意下面的字是手打的)
+
+添加之后是这样的，三个函数库的顺序不影响。
+
+最后完成的时候是这样的，然后就可以点击“确定”，记得要点击确定。
+
+这里，如果不替换riched20的话则安装好QQ后无法输入用户名，不停用txplatform.exe则WineQQ无法完整退出，导致关掉重开后提示QQ文件被占用，禁用ntoskrnl.exe是为了规避可能出现QQ无法启动的bug。前面的*号可以省略，不过我觉得比较好看，还是加上去了。
+操作到这里，准备工作就已经结束了。
+ 
+二、安装QQ和解决可能出现的问题
+1.安装QQ
+下载好QQ的安装包后，可以直接右键选择用Wine Windows Program Loader打开，也可以在所在目录执行，wine  XXX.exe，如，我这里命名为QQ8.9.2.exe，就执行：
+wine QQ8.9.2.exe
+具体的名字应该根据实际情况更改，命令执行的结果就是接下来会弹出友好的安装界面。点击立即安装，然后等待就好了，最后点击完成安装之后就会启动QQ，可以登录试一试，不过还有一些问题需要解决。
+
+2.如果发现无法输入中文
+安装完成后，可以登录一下QQ试一试，你会看到清爽的QQ界面，并且大多数功能都是正常的，可是在尝试和进行聊天的时候却发现怎么也打不了中文，用Ctrl+Space切换输入也行不通，反而只能打出一个空格。是不是我们的安装出了什么问题呢？答案是否定的，这里的环境是64位ubuntukylin16.04，经测试发现这是ubuntu自带的ibus模块的问题，ibus会排斥其他输入法，导致我们无法在wineQQ中使用fcitx拼音，解决方式也很简单，就是删除ibus。
+首先，先关闭正在运行的wineQQ，并且打开终端，执行如下操作：
+卸载ibus：
+sudo apt-get  remove  ibus
+清除ibus配置：
+sudo apt-get  purge  ibus
+卸载顶部面板任务栏上的键盘指示
+sudo  apt-get remove   indicator-keyboard
+这样ibus就被完全卸载了，但是请注意，在如ubuntu14.04等比较早的版本中，ibus是与系统组件捆绑在一起的，卸载之后系统设置中的许多功能模块也会自动被卸载，若出现这种情况，可以通过执行：sudo apt-get install unity-control-center解决。
+这样再次打开QQ就可以使用中文了，如果发现没有立即生效的话请先注销或者重启。打开QQ的方法为，终端执行：
+wine c:/Program\ Files\ \(x86\)/Tencent/QQ/Bin/QQ.exe
+注意：因为我的wine容器是64位的，所以存放QQ的文件夹为Program Files (x86)，如果wine容器是32位的，存放QQ的文件夹则为Program Files，则对应的Program\ Files\ \(x86\)需要改为Program\ Files。
+操作完成后再次打开QQ就发现可以输入中文啦：
+
+3.添加桌面图标。
+上面的步骤全部操作无误之后这次WineQQ的安装就基本成功了，而且大部分功能也是正常的。但是没有桌面图标（或者有一个Ink文件但是无法启动），所以我们需要手动添加一个。ubuntu应用配置文件书写方式可以参照/usr/share/applications下面的各种文件，终端用ls查看可以看到他们的后缀名都是.desktop。所以这里我照着写了一个QQ.desktop
+另外我们需要一个QQ图标的png文件让它看起来好看一点。
+首先，新建一个QQ.desktop文本文件，在里面加入：
+[Desktop Entry]
+Name=QQ
+Exec=wine c:/Program\\ Files\\ \\(X86\\)/Tencent/QQ/Bin/QQ.exe
+Type=Application
+如图：
+
+注意：
+1.这里我的wine容器是64位的，所以存放QQ的文件夹为Program Files (x86)，对应代码为Program\ Files\ \(x86\)，如果wine容器是32位的，那么存放QQ的文件夹为Program Files，对应的代码为Program\ Files，应该根据实际情况修改。
+2.这里由于采用默认的主目录下的.wine目录作为wine容器安装，所以执行代码为wine xxx/xxx.exe，如果采用了自定义的wine容器，比如wine容器是/home/wb/test，则需要把启动代码改为env WINEPREFIX=/home/wb/test wine xxx/xxx.exe。（小白请忽略这段话）
+保存后我们会看到它的显示效果已经变了，显示的名字只有“QQ”，不过现在它没有图标也不能启动，右键它，然后点击属性，再点击那个齿轮图标，会弹出一个选择窗口，这里选择自己下载好的图标就好了，这里我的图标QQ.png是放在主目录的隐藏文件夹.wine里面的，想看到隐藏文件夹可以按Ctrl+H，放到一个不常用的目录可以避免误删。
+
+选择自己的图标，然后确定。
+
+最后的显示效果是这样的，不过我们还需要最后一部操作，点击属性中的权限，把下面执行栏打上勾。如图：
+
+最后把属性窗口关掉，这个QQ快捷方式就添加完成了，可以双击打开，也可以拖到任务栏。
+注意：如果最后不添加执行权限的话将无法运行，会提示当前应用没有通过安全认证。
+已知BUG：
+1.无法保存密码;
+2.无法使用视频通话;
+3.无法使用远程演示;
+4.无法用内嵌Qznoe模块打开聊天窗口中的音乐网页链接;
+附注：后3个会导致WineQQ的崩溃，如果关于以上Bug的处理有最新进展的话我会不定时再更新。
+关于我是怎么想到要这样操作的，主要要归功于许多前辈分享的方法，其中我认为很有帮助的是winetricks-zh项目中的各种verb文件，里面提到了可能需要将wine设置为XP环境（Wine2.0.1版本已经默认是，所以文中没有提到），以及要开启riched20函数库，禁用ntoskrnl.exe和txplatform.exe，我受到启发进行了上述配置，并有一些步骤进行了省略，经测试发现运行没有问题，只是这样安装出来的QQ面板大小比winetrics-zh安装出来的要大一些，暂时不知道为什么。
+
+教程就写到这里，如果有更好的方法或者我教程中漏掉步骤欢迎私信跟我沟通。
+ 
+WineQQ8.9.2卸载办法：
+*卸载QQ: 终端执行 wine uninstaller 然后选中QQ进行删除;
+以下步骤为可选：
+完全删除默认wine容器： rm -rf ~/.wine
+卸载wine： sudo apt-get remove winehq-stable
+最新更新：关于提示flash版本过低的问题，其实对qq使用没有太大影响，不过可以通过winetricks安装flash组件解决。
+参见winetricks官网安装winetricks之后，https://wiki.winehq.org/Winetricks
+终端执行
+wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+chmod +x winetricks
+./winetricks flash，等待安装完成即可。
+ 
+附上QQ.desktop和QQ.png及原文：http://www.ubuntukylin.com/ukylin/forum.php?mod=viewthread&tid=30511&extra=
+ 
+本文永久更新地址：http://www.linuxdiyf.com/linux/30656.html
