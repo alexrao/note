@@ -33,7 +33,8 @@ mount -t vmhgfs .host:/ /mnt/hgfs
 
 另外：
 1. 安装  bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf   g++-multilib apt-file libxml2-utils xsltproc  android-tools-*  u-boot-tools
-2. apt-get install ctags ack-grep samba nfs-kernel-*  openssl gimp inkscape gthumb  ttf-wqy-zenhei
+2. apt-get install ctags ack-grep samba nfs-kernel-*  openssl gimp inkscape gthumb  ttf-wqy-zenhei cifs-utils
+3. apt-get install minicom filezilla wireshark
 update-alternatives --install /usr/bin/javac javac /home/workspace/tools/jvm/jdk1.6.0_38/bin/javac 1
 update-alternatives --install /usr/bin/java java 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/java 1
 update-alternatives --install /usr/bin/javaws javaws 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javaws 1
