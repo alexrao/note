@@ -1,0 +1,36 @@
+ubuntu下USB连接Android手机后，使用adb devices 出现如下：
+List of devices attached
+
+
+或者List of devices attached<这种情况为没找到设备>
+
+解决方法:
+
+1.$lsusb
+Bus 002 Device 003: ID 413c:2107 Dell Computer Corp. 
+Bus 002 Device 008: ID 2a45:0c02 Meizu Corp. MX Phone (MTP & ADB)
+Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 093a:2510 Pixart Imaging, Inc. Optical Mouse
+Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+找到手机品牌对应的ID,有些手机没有明显提示,可两台手机对比查出哪行是手机的id。列表中，Bus 002 Device 008: ID 2a45:0c02 Meizu Corp. MX Phone (MTP & ADB) 这一行为魅族手机的usb使用端口，记录一下，id为2a45（基于上所有的魅族都是这个ID）。
+
+2.$sudo gedit ~/.android/adb_usb.ini,编辑该文件,加入0x2a45
+若加入多台设备，换行输入id即可，例如：
+#for MEIZU
+0x2a45
+#for MT3561
+0x0e8d
+
+3.$sudo service udev restart
+
+4.重新启动adb server
+adb kill-server
+adb start-server
+adb devices
+
+ps：
+网上很多还有说用命令$sudo vim /etc/udev/rules.d/51-android.rules，但是楼主试了并没起到什么效果，直接编辑adb_usb.ini文件是我亲测最有效果的方法～
+
