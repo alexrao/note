@@ -1,8 +1,8 @@
 1. 安装系统后安装apt-get install lib32z1 lib32ncurses5 libc6-i386 libstdc++6  lib32stdc++6
-    vim、gedit、gdb、gcc、build-essential等、
+    apt-get install vim gedit gdb gcc build-essential  等、
 2. fcitx添加google拼音
 sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-googlepinyin fcitx-module-cloudpinyin
-3. git、subversion
+3. apt install git subversion   minicom filezilla wireshark
 2. 交叉编译工具无效的处理（64位系统下面兼容32位）
 apt-get install lib32z1 lib32ncurses5 libc6-i386 libstdc++6  lib32stdc++6
 3. 配置git
@@ -17,7 +17,7 @@ git config --global alias.pl pull
 git config --global alias.unstage 'reset HEAD'
 git config --global alias.last 'log -1'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global user.name "alexrao"
+git config --global user.name "rxp"
 git config --global user.email "rxp2013@163.com"
 
 4. 解决vmware tools共享在linux显示不了文件的问题：
@@ -32,9 +32,9 @@ mount -t vmhgfs .host:/ /mnt/hgfs
 
 
 另外：
-1. 安装  bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf   g++-multilib apt-file libxml2-utils xsltproc  android-tools-*  u-boot-tools
+1. 安装  apt-get install bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf   g++-multilib apt-file libxml2-utils xsltproc  android-tools-*  u-boot-tools
 2. apt-get install ctags ack-grep samba nfs-kernel-*  openssl gimp inkscape gthumb  ttf-wqy-zenhei cifs-utils
-3. apt-get install minicom filezilla wireshark
+3. apt-get install minicom filezilla wireshark gparted
 update-alternatives --install /usr/bin/javac javac /home/workspace/tools/jvm/jdk1.6.0_38/bin/javac 1
 update-alternatives --install /usr/bin/java java 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/java 1
 update-alternatives --install /usr/bin/javaws javaws 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javaws 1
@@ -45,3 +45,42 @@ update-alternatives --config java
 update-alternatives --config javaws
 update-alternatives --config jar
 update-alternatives --config javap
+
+安装sublime
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+sudo apt-get update
+sudo apt-get install sublime-text
+
+安装sublime的package-control:
+按: ctrl+`
+输入:
+import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+
+安装atom:
+sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update
+sudo apt-get install atom
+
+安装Opengl:
+sudo apt-get install build-essential  libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
+
+安装cairo:
+sudo apt-get install libcairo2-dev
+pkg-config --cflags --libs cairo
+
+参考: http://blog.csdn.net/zh19921107/article/details/45094759
+
+
+卸载:
+Amazon:
+apt purge  unity-webapps-common thunderbird breoffice-common libreoffice-style-human firefox firefox-locale-*
+
+
+4. 安装其他
+    sudo apt-get install mtd-utils zlibc lzop
+5. 更换ubunt shell环境为bash
+    sudo dpkg-reconfigure dash
+    选择 no
+

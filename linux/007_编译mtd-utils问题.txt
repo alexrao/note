@@ -1,0 +1,32 @@
+在编译海思SDK时，会出现如下错误：
+
+serve_image.c:32:18: error: storage size of ‘hints’ isn’t known
+serve_image.c:94:19: error: ‘AI_ADDRCONFIG’ undeclared (first use in this function)
+serve_image.c:99:40: warning: implicit declaration of function ‘gai_strerror’ [-Wimplicit-function-declaration]
+fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(ret));
+fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(ret));
+serve_image.c:103:35: error: dereferencing pointer to incomplete type ‘struct addrinfo’
+make[6]: *** [/home/sky2_klockwork/motianbiao/hmtisi/sdk/kitkat/out/target/product/Hi3798MV100/obj/TOOLS_OBJ/mtd-utils/tmp/mtd-utils-1.5.0/serve_image.o] Error 1
+make[5]: *** [/home/sky2_klockwork/motianbiao/hisi/sdk/kitkat/out/target/product/Hi3798MV100/obj/TOOLS_OBJ/mtd-utils/tmp/sbin/mkfs.jffs2] Error 2
+make[4]: [mkmtdutils_tool] Error 1 (ignored)
+make[4]: [mkmtdutils_tool] Error 1 (ignored)
+make[4]: [mkmtdutils_tool] Error 1 (ignored)
+
+究其原因，在于ubuntu操作系统版本太高，而SDK使用的mtd-utils版本太低导致(device/hisilicon/bigfish/sdk/tools/linux/utils/mtd-utils/mtd-utils-1.5.0)，正常情况下，ubuntu12.04.04下支持mtd-utils-1.5.0，但是ubuntu16.04版本兼容不是很好，但是16.04支持mtd-utils-2.0.0版本，所以，解决办法有如下几种：
+
+方法1.修改sdk版本下的mtd-utils-1.5.0为mtd-utils-2.0.0，可以在root权限下通过命令：wget ftp://ftp.infradead.org/pub/mtd-utils/mtd-utils-2.0.0.tar.bz2 获取，然后替换device/hisilicon/bigfish/sdk/tools/linux/utils/mtd-utils/下的mtd-utils-1.5.0.tar.bz2版本
+
+方法2.修改操作系统头文件/usr/include/netdb.h，将此宏__USE_XOPEN2K注释，如下图(注意#ifdef与#endif是一一对应的)
+
+
+
+    方法3.当然是修改操作系统的内核版本咯，可以通过如下命令更换操作系统内核版本：
+
+
+    ①sudo apt-cache search linux-image(搜索可下载内核)
+②sudo apt-get install linux-image-2.6.32-21-generic(下载内核)
+    ③更换系统内核：sudo vim /boot/grub/grub.cfg
+    ④set default="0" #内核默认启动顺序从0开始依次类推，如果数错了进入恢复模式，开机时按shift选择启动内核(可以通过grep menuentry /boot/grub/grub.cfg查看位置)
+
+    以上3中方法，就看哪种更适合你了。
+

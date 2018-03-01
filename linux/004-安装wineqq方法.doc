@@ -27,12 +27,12 @@ QQ是我们经常使用的聊天工具，然而linux下却缺乏原生的QQ应�
 参照Wine官网的说法，64位ubuntu需要先执行：
 sudo  dpkg  --add-architecture i386
 然后执行：
-wget  https://dl.winehq.org/wine-builds/Release.key
-sudo  apt-key add Release.key
-sudo  apt-add-repository  https://dl.winehq.org/wine-builds/ubuntu/
-sudo  apt-get  update
+wget https://dl.winehq.org/wine-builds/Release.key
+sudo apt-key add Release.key
+sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
+sudo apt-get  update
 这里我安装的是wine稳定版2.0.1，执行：
-sudo  apt-get  install  --install-recommends  winehq-stable
+sudo apt-get install --install-recommends winehq-stable
 这样，wine的安装就到此结束了，可以在终端输入 wine --version 查看版本号，此外还有一些配置工作需要做，终端执行：
 winecfg
 这个命令是为了更新主目录下的.wine目录，也就是创建一个默认容器。
