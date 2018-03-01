@@ -84,3 +84,9 @@ apt purge  unity-webapps-common thunderbird breoffice-common libreoffice-style-h
     sudo dpkg-reconfigure dash
     选择 no
 
+6. ubuntu16.04上编译android sdk时候调整
+    方法2.修改操作系统头文件/usr/include/netdb.h，将此宏__USE_XOPEN2K注释，如下图(注意#ifdef与#endif是一一对应的)，单独的宏(565行左右)
+    #ifdef __USE_XOPEN2K 改成 #if 1 //def __USE_XOPEN2K
+
+
+
