@@ -1,0 +1,5 @@
+1. 修改CVBS-IN(656)初始化参数:(/home/workspace/tools/ktv_001/HiSTBAndroidV500R001C01SPC020/device/hisilicon/bigfish/sdk/source/msp/drv/vad/tvp5150/tvp5150.c)  init_tvp5150函数(656分支)中添加寄存器0x09(亮度0x00[最暗] - 0xFF[最亮]: 默认0x80)
+2. 编译kernel:
+    配置: make kernel_menuconfig  配置kernel选项(第一次需要调整, 后续不做配置改动的时候不用处理)
+    编译: make kernel -j16 2>&1 |tee kernel.log
+
