@@ -1,0 +1,6 @@
+1. HiContraLauncher:
+    /home/workspace/tools/kl90x/HiSTBAndroidV600R003C00SPC020/device/hisilicon/bigfish/packages/apps/HiContraLauncher
+
+2. inputflinger(鼠标等回调, 可在sync函数中获取状态处理)
+/home/workspace/tools/kl90x/HiSTBAndroidV600R003C00SPC020/frameworks/native/services/inputflinger
+
