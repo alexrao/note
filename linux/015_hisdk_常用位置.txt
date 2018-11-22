@@ -4,3 +4,40 @@
 2. inputflinger(鼠标等回调, 可在sync函数中获取状态处理)
 /home/workspace/tools/kl90x/HiSTBAndroidV600R003C00SPC020/frameworks/native/services/inputflinger
 
+3. HiMediaPlayer(播放器doInvoke: android调用播放器中转, CMD_SET_SOUND_TONE等)
+HiSTBAndroidV500R001C01SPC020/device/hisilicon/bigfish/frameworks/himediaplayer/hal/HiMediaPlayer.cpp
+
+4. avplayer中提取音频帧作为变调:
+/home/workspace/tools/ktv_001/HiSTBAndroidV500R001C01SPC020/device/hisilicon/bigfish/sdk/source/msp/avplayer/mpi_avplay.c
+AVPLAY_ProcAdecToAo 函数中
+    //===============================================================
+    if (!pAvplay->AvplayProcDataFlag[AVPLAY_PROC_ADEC_AO])
+    {
+        pAvplay->DebugInfo.AcquireAudFrameNum++;
+
+        JSL_PRINT("jlinkavplayer: 1");
+        Ret = HI_MPI_ADEC_ReceiveFrame(pAvplay->hAdec, &pAvplay->AvplayAudFrm, &AdecExtInfo);
+        if (HI_SUCCESS == Ret)
+        {
+            JSL_PRINT("jlinkavplayer: 2");
+            pAvplay->AudInfo.SrcPts = AdecExtInfo.u32OrgPtsMs;
+            pAvplay->AudInfo.Pts = pAvplay->AvplayAudFrm.u32PtsMs;
+            pAvplay->AudInfo.FrameTime = AdecExtInfo.u32FrameDurationMs;
+
+    #if 1
+            HI_MPI_AO_ProcFrameTone(pAvplay->hSyncTrack, &pAvplay->AvplayAudFrm);
+    #endif
+            JSL_PRINT("jlinkavplayer: 3");
+            pAvplay->DebugInfo.AcquiredAudFrameNum++;
+            pAvplay->AvplayProcDataFlag[AVPLAY_PROC_ADEC_AO] = HI_TRUE;
+            AVPLAY_ThreadMutex_UnLock(pAvplay->pAvplayThreadMutex);
+            AVPLAY_Notify(pAvplay, HI_UNF_AVPLAY_EVENT_NEW_AUD_FRAME, (HI_U32)(&pAvplay->AvplayAudFrm));
+            AVPLAY_ThreadMutex_Lock(pAvplay->pAvplayThreadMutex);
+        }
+        else
+        {
+        }
+    }
+    //===============================================================
+
+
