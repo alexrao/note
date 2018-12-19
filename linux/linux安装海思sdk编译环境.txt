@@ -1,0 +1,46 @@
+1. 安装系统后安装apt-get install lib32z1 lib32ncurses5 libc6-i386 libstdc++6  lib32stdc++6
+    apt-get install vim gedit gdb gcc build-essential  等、
+2. apt install git subversion   minicom 
+3. 交叉编译工具无效的处理（64位系统下面兼容32位）
+apt-get install lib32z1 lib32ncurses5 libc6-i386 libstdc++6  lib32stdc++6
+
+4. 解决vmware tools共享在linux显示不了文件的问题：
+sudo apt-get install linux-source
+sudo apt-get install open-vm-tools
+Just keep on pressing Enter for all defaults and then do this at the terminal
+
+5. vmware-hgfsclient    查看当前共享的文件夹
+6. 挂载当前共享的所有文件夹
+mount -t vmhgfs .host:/ /mnt/hgfs
+
+
+另外：
+7. 安装  apt-get install bison build-essential flex zlib1g-dev libncurses-dev libx11-dev gperf   g++-multilib apt-file libxml2-utils xsltproc  android-tools-*  u-boot-tools
+8. apt-get install ctags ack-grep samba nfs-kernel-*  openssl gimp inkscape gthumb  ttf-wqy-zenhei cifs-utils
+9. apt-get install minicom filezilla wireshark gparted
+10. 安装jdk(自行替换后面安装目录)
+update-alternatives --install /usr/bin/javac javac /home/workspace/tools/jvm/jdk1.6.0_38/bin/javac 1
+update-alternatives --install /usr/bin/java java 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/java 1
+update-alternatives --install /usr/bin/javaws javaws 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javaws 1
+update-alternatives --install /usr/bin/jajsdkfjlkr jar 		/home/workspace/tools/jvm/jdk1.6.0_38/bin/jar 1
+update-alternatives --install /usr/bin/javap javap 	/home/workspace/tools/jvm/jdk1.6.0_38/bin/javap 1
+update-alternatives --config javac
+update-alternatives --config java
+update-alternatives --config javaws
+update-alternatives --config jar
+update-alternatives --config javap
+
+
+11. 安装其他
+    sudo apt-get install mtd-utils zlibc lzop
+12. 更换ubunt shell环境为bash
+    sudo dpkg-reconfigure dash
+    选择 no
+
+13. ubuntu16.04上编译android sdk时候调整
+    方法2.修改操作系统头文件/usr/include/netdb.h，将此宏__USE_XOPEN2K注释，如下图(注意#ifdef与#endif是一一对应的)，单独的宏(565行左右)
+    #ifdef __USE_XOPEN2K 改成 #if 1 //def __USE_XOPEN2K
+
+14. ubuntu安装android交叉编译工具
+    apt-get install gcc-arm-linux-androideabi
+
