@@ -39,5 +39,16 @@ AVPLAY_ProcAdecToAo 函数中
         }
     }
     //===============================================================
+1. boot配置文件目录：
+/home/workspace/tools/ktv_001/HiSTBAndroidV500R001C01SPC020/device/hisilicon/bigfish/sdk/source/boot/sysreg/
+文件名： hi3718cott1a_hi3718cv100_ddr3_1gbyte_16bitx2_4layers_ET001_emmc.reg
 
+2. boot配置文件读取位置：
+device/hisilicon/Hi3719CV100/BoardConfig.mk
+
+3. 查看寄存器状态(基地址：0xF8A21000, 偏移地址：0x0AC)
+    查看寄存器状态： himd.l 0xF8A210AC      (查看寄存器状态)
+    修改寄存器状态： himm 0xF8A210AC 0x202  (修改寄存器: 0x0AC的值为: 0x202)
+    
+4. 升级文件名更换需要替换(recovery.img和priv-app/hisetting.apk)
 
